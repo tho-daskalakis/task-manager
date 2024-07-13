@@ -53,7 +53,14 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        // Check if task exists
+        $taskExists = Task::all(['id'])->contains($task->id);
+
+        if (! $taskExists) {
+            return redirect()->route('tasks.index');
+        }
+
+        return view('tasks.show', compact('task'));
     }
 
     /**
