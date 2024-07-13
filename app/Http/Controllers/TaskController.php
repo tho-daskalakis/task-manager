@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -13,7 +14,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        // Show all tasks
+        $tasks = Task::all();
+
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
