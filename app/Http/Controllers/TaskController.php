@@ -33,7 +33,19 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        $task = new Task();
+
+        // Get current user id.
+        $user_id = Auth::id();
+
+        // Pass attributes to instance.
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->user_id = $user_id;
+
+        $task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**
